@@ -681,7 +681,7 @@ To /秘密/kyoyuu.git
    b84d061..dc641c1  master -> master
 ```
 
-もっと過去からやり直したい
+もっと過去からやり直したい（そして未来へ戻りたい）
 -----------------
 シナリオ：
 太郎は、思いました。
@@ -731,3 +731,8 @@ $ git log --oneline
 
 何が起こったのかは次のページの解説がわかりやすいです。
 http://qiita.com/shuntaro_tamura/items/db1aef9cf9d78db50ffe
+
+やっぱり元に戻しましょう
+`git reflog`と実行してください。
+
+commit id を指定して`git revert {commit_id}`を実行してください。
