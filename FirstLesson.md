@@ -3,29 +3,31 @@ Git ドリル 第1回
 
 初期設定
 ---------
-- ユーザー名とメールアドレスを設定
-```
-git config --global user.name "Taro Yamada"
-git config --global user.email "yamada@example.net"
-```
-ちなみに--globalオプションをつけて修正される設定ファイルは
-~/.gitconfig
-世界中の人の画面に表示されることを意識して
-（日本語フォントが入っていない環境を意識して）、ユーザー名は英語にしましょう。
+1. ユーザー名とメールアドレスを設定
 
-- 確認する
-```
-git config --global -l
-例:
-$ git config --global -l
-user.name=Vermee81
-user.email=***[秘密]***
-core.excludesfile=/Users/[秘密]/.gitignore
-core.editor=/usr/bin/vim
-color.ui=true
-```
-- やり直したいときは
-同じ設定コマンド入力しましょう
+    ```
+    git config --global user.name "Taro Yamada"
+    git config --global user.email "yamada@example.net"
+    ```
+    ちなみに--globalオプションをつけて修正される設定ファイルは
+    ~/.gitconfig
+    世界中の人の画面に表示されることを意識して
+    （日本語フォントが入っていない環境を意識して）、ユーザー名は英語にしましょう。
+    
+2. 確認する
+
+    ```
+    git config --global -l
+    例:
+    $ git config --global -l
+    user.name=Vermee81
+    user.email=***[秘密]***
+    core.excludesfile=/Users/[秘密]/.gitignore
+    core.editor=/usr/bin/vim
+    color.ui=true
+    ```
+
+3. やり直したいときは同じ設定コマンド入力しましょう
 
 
 練習環境の作成
@@ -35,60 +37,61 @@ color.ui=true
 太郎さんのリポジトリ
 花子さんのリポジトリ
 
-1.  練習用のディレクトリ作成
-```
-mkdir [好きなディレクトリ名]
-cd [好きなディレクトリ名]
-例:
-mkdir 20150711_training
-cd 20150711_training
-```
+1. 練習用のディレクトリ作成
+
+    ```
+    mkdir [好きなディレクトリ名]
+    cd [好きなディレクトリ名]
+    例:
+    mkdir 20150711_training
+    cd 20150711_training
+    ```
 
 2. 共用リポジトリ作成（仮想リモートリポジトリ）
-ここではkyoyuu.gitというディレクトリを共用リポジトリとします。
-このリポジトリ名を前提に進めていくので、同じ名前にすることをおすすめします。
-```
-mkdir kyoyuu.git
-cd kyoyuu.git
-git init --bare --share
-例:
-$ git init --bare --share
-Initialized empty shared Git repository in /Users/[秘密]/Documents/workspace/20150711_training/kyoyuu.git/
-```
-
+    ここではkyoyuu.gitというディレクトリを共用リポジトリとします。
+    このリポジトリ名を前提に進めていくので、同じ名前にすることをおすすめします。
+    ```
+    mkdir kyoyuu.git
+    cd kyoyuu.git
+    git init --bare --share
+    例:
+    $ git init --bare --share
+    Initialized empty shared Git repository in /Users/[秘密]/Documents/workspace/20150711_training/kyoyuu.git/
+    ```
+    
 3. 太郎さんのリポジトリ作成
-```
-cd .. //練習用ディレクトリ直下に戻る
-mkdir -p Taro/kyoyuu
-cd Taro/kyoyuu
-git init //リポジトリの作成
-git config user.name "Taro Yamada" //太郎用にユーザー名を設定
-git config user.email "taro_yamada@example.com" //太郎用にemailを設定
-git remote add origin [[共用リポジトリまでのパス]]
-```
-確認
-```
-git remote -v
-```
-修正したいとき
-```
-git remote set-url origin [[共用リポジトリまでのパス]]
-```
+    ```
+    cd .. //練習用ディレクトリ直下に戻る
+    mkdir -p Taro/kyoyuu
+    cd Taro/kyoyuu
+    git init //リポジトリの作成
+    git config user.name "Taro Yamada" //太郎用にユーザー名を設定
+    git config user.email "taro_yamada@example.com" //太郎用にemailを設定
+    git remote add origin [[共用リポジトリまでのパス]]
+    ```
+    確認
+    ```
+    git remote -v
+    ```
+    修正したいとき
+    ```
+    git remote set-url origin [[共用リポジトリまでのパス]]
+    ```
 
 4. 花子さんのリポジトリ作成
-```
-cd ../../ //練習用ディレクトリ直下に戻る
-mkdir -p Hanako/kyoyuu
-cd Hanako/kyoyuu
-git init //リポジトリの作成
-git config user.name "Hanako Suzuki" //花子用にユーザー名を設定
-git config user.email "hanako_suzuki@example.com" //花子用にemailを設定
-git remote add origin [[共用リポジトリまでのパス]]
-```
-確認
-```
-git remote -v
-```
+    ```
+    cd ../../ //練習用ディレクトリ直下に戻る
+    mkdir -p Hanako/kyoyuu
+    cd Hanako/kyoyuu
+    git init //リポジトリの作成
+    git config user.name "Hanako Suzuki" //花子用にユーザー名を設定
+    git config user.email "hanako_suzuki@example.com" //花子用にemailを設定
+    git remote add origin [[共用リポジトリまでのパス]]
+    ```
+    確認
+    ```
+    git remote -v
+    ```
 
 はじめてのコミット
 ------------
@@ -129,8 +132,7 @@ Untracked files:
 
 nothing added to commit but untracked files present (use "git add" to track)
 ```
-太郎さんはindex.htmlファイルをブラウザで開いて確認しました。
-「Hello 太郎」と表示されていたので、コミットすることにします。
+太郎さんはindex.htmlファイルをブラウザで開いて確認しました。「Hello 太郎」と表示されていたので、コミットすることにします。
 
 リポジトリの管理対象にするために、ステージ領域に追加します。
 ```
@@ -223,21 +225,23 @@ Date:   Sat Jul 11 22:46:35 2015 +0900
 ドリル1-1
 ----------
 花子さんのリポジトリで以下の操作をしてください。
-1. 花子さんのリポジトリの直下にindex.html
-というファイルを作成してください。
-ファイルの中身は以下のようにしてください。
-```
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8" />
-<title>トップページ</title>
-</head>
-<body>
-<h1>Hello 太郎と花子</h1>
-</body>
-</html>
-```
+
+1. 花子さんのリポジトリの直下にindex.htmlというファイルを作成してください。
+    ファイルの中身は以下のようにしてください。
+
+    ```
+    <!DOCTYPE html>
+    <html lang="ja">
+    <head>
+    <meta charset="utf-8" />
+    <title>トップページ</title>
+    </head>
+    <body>
+    <h1>Hello 太郎と花子</h1>
+    </body>
+    </html>
+    ```
+
 2. リポジトリの状態を確認してください
 3. index.htmlをステージ領域に追加してください
 4. `git commit`と実行して、コミットしてください。
@@ -245,40 +249,45 @@ Date:   Sat Jul 11 22:46:35 2015 +0900
 5. `git commit --amend`と実行してコミットのコメントを修正してください。
 どんな修正でもかまいません。
 6. リポジトリの状態を確認して、ステージ領域に何も残っていないことを確認してください。
-```
-On branch master
-nothing to commit, working directory clean
-```
+
+    ```
+    On branch master
+    nothing to commit, working directory clean
+    ```
 
 歴史をきざむ
 ------------
-シナリオ：太郎さんは、トップページを見て、物足りなさを感じました。
+シナリオ：太郎さんは、トップページを見て物足りなさを感じました。
 「もうちょっと、目立たせよう。」
 
 ドリル1-2
 --------
 1. index.htmlを以下のように修正してください。
-```
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8" />
-<title>トップページ</title>
-</head>
-<body>
-<h1>Hello 太郎</h1>
-</body>
-</html>
-```
+
+    ```
+    <!DOCTYPE html>
+    <html lang="ja">
+    <head>
+    <meta charset="utf-8" />
+    <title>トップページ</title>
+    </head>
+    <body>
+    <h1>Hello 太郎</h1>
+    </body>
+    </html>
+    ```
+
 2. リポジトリの状態を確認してください。以下のようになっていることを確認してください。
-```
-On branch master
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-	modified:   index.html
-no changes added to commit (use "git add" and/or "git commit -a")
-```
+
+    ```
+    On branch master
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git checkout -- <file>..." to discard changes in working directory)
+    modified:   index.html
+    no changes added to commit (use "git add" and/or "git commit -a")
+    ```
+
 3. `git diff`と入力して差分を確認してください。
 4. ブラウザで確認してください。
 5. index.htmlをステージ領域に追加してください。
@@ -298,26 +307,29 @@ h1で囲んだ記録は花子に見られたくない。
 花子さんにも笑われてしまいます。
 
 1. 以下のように太郎さんのindex.htmlを修正してください。
-```
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8" />
-<title>トップページ</title>
-</head>
-<body>
-<b>Hello 太郎</b>
-</body>
-</html>
-```
+
+    ```
+    <!DOCTYPE html>
+    <html lang="ja">
+    <head>
+    <meta charset="utf-8" />
+    <title>トップページ</title>
+    </head>
+    <body>
+    <b>Hello 太郎</b>
+    </body>
+    </html>
+    ```
+
 2. ブラウザで動作確認した後、`git add index.html`を実行してください
 3. `git commit --amend`でコミットしてください。コメントは判別できれば適当でいいです。
 4. `git log --oneline`でリポジトリの記録を確認してください
-```
-$ git log --oneline
-774fe59 [modify] メッセージをbタグで囲む
-ee214c6 [add]自分の名前を表示する
-```
+
+    ```
+    $ git log --oneline
+    774fe59 [modify] メッセージをbタグで囲む
+    ee214c6 [add]自分の名前を表示する
+    ```
 
 
 機能別にブランチを作成
@@ -432,7 +444,7 @@ $ git status
 On branch login_screen
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
-	login.html
+login.html
 nothing added to commit but untracked files present (use "git add" to track)
 $ git add login.html
 $ git commit
@@ -447,11 +459,11 @@ b8c5246 [modify] メッセージをbタグで囲む
 
 ドリル1-5
 ----------
-- ログイン画面の先頭にある「Login」(9行目にあります)を「ログイン画面」に変更してください
-- リポジトリの状態を確認してください
-- ブラウザでlogin.htmlに表示くずれがないか確認してください
-- login.htmlをステージ領域に追加してください
-- login.htmlをコミットしてください。
+1. ログイン画面の先頭にある「Login」(9行目にあります)を「ログイン画面」に変更してください
+2. リポジトリの状態を確認してください
+3. ブラウザでlogin.htmlに表示くずれがないか確認してください
+4. login.htmlをステージ領域に追加してください
+5. login.htmlをコミットしてください。
 
 ```
 $ git status
@@ -459,7 +471,7 @@ On branch login_screen
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git checkout -- <file>..." to discard changes in working directory)
-	modified:   login.html
+modified:   login.html
 no changes added to commit (use "git add" and/or "git commit -a")
 $ git add login.html
 $ git commit
@@ -650,7 +662,7 @@ You are currently rebasing branch 'master' on 'b8c5246'.
 Unmerged paths:
   (use "git reset HEAD <file>..." to unstage)
   (use "git add <file>..." to mark resolution)
-	both added:      index.html
+both added:      index.html
 no changes added to commit (use "git add" and/or "git commit -a")
 $ git add index.html
 ```
@@ -687,18 +699,19 @@ To /秘密/kyoyuu.git
 太郎は、思いました。
 「何で自分はこんなに強調してるんだ。謙虚になろう。初心にかえろう。。。」
 
-- 太郎さんのリポジトリに移動
+1. 太郎さんのリポジトリに移動
 `cd ../../Taro/kyoyuu/`
 
-- `git log --oneline`を実行して最初のハッシュを確認してください
-```
-$ git log --oneline
-b84d061 Merge branch 'login_screen'
-84b7e42 [modify] ページ先頭のタイトルを日本語に変更
-e64d705 [add] ログイン画面を追加
-2fa0c37 [modify] メッセージをbタグで囲む
-16df9cb [add] 自分の名前を表示する
-```
+2. `git log --oneline`を実行して最初のハッシュを確認してください
+
+    ```
+    $ git log --oneline
+    b84d061 Merge branch 'login_screen'
+    84b7e42 [modify] ページ先頭のタイトルを日本語に変更
+    e64d705 [add] ログイン画面を追加
+    2fa0c37 [modify] メッセージをbタグで囲む
+    16df9cb [add] 自分の名前を表示する
+    ```
 
 それでは`git reset`コマンドを実行して過去に戻りましょう。
 まずはsoftオプションで実行してください。
@@ -709,7 +722,7 @@ On branch master
 Changes to be committed:
   (use "git reset HEAD <file>..." to unstage)
 
-	new file:   login.html
+new file:   login.html
 
 $ git log --oneline
 2fa0c37 [modify] メッセージをbタグで囲む
