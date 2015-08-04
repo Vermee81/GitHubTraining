@@ -13,7 +13,7 @@ Git ドリル 第1回
     ~/.gitconfig
     世界中の人の画面に表示されることを意識して
     （日本語フォントが入っていない環境を意識して）、ユーザー名は英語にしましょう。
-    
+
 2. 確認する
 
     ```
@@ -58,7 +58,7 @@ Git ドリル 第1回
     $ git init --bare --share
     Initialized empty shared Git repository in /Users/[秘密]/Documents/workspace/20150711_training/kyoyuu.git/
     ```
-    
+
 3. 太郎さんのリポジトリ作成
     ```
     cd .. //練習用ディレクトリ直下に戻る
@@ -488,19 +488,97 @@ b8c5246 [modify] メッセージをbタグで囲む
 378cedf [add] 自分の名前を表示する
 ```
 
+結合するときは慎重に
+-------------------
+
 マスターブランチに結合しましょう。
 gitでブランチを統合するときによく使うコマンドは２つあります。
 `git merge`と`git rebase`です。
-今回はこの２つの違いや使い分けの説明は省きます。
-
-
-今説明すると混乱すると思いますので、次回以降に説明します。
 どちらを使うかは、gitの運用によるところもあります。
-どうしても今知りたい方は以下の投稿を読んでください。
-http://powerful-code.com/blog/2012/11/merge-or-rebase/
+２種類の結合を試してみましょう。
 
+まずは、かなり違和感がありますが、
+`git rebase`を試してみましょう。
+rebaseは2つのブランチに分かれていた履歴が1つになります。
+```
+$ git checkout master
+Switched to branch 'master'
+$ git log --oneline
+217de6d [modify] メッセージをbタグで囲む
+fd127c4 [add] 自分の名前を表示する
+$ git rebase login_screen
+First, rewinding head to replay your work on top of it...
+Fast-forwarded master to login_screen.
+$ git log --oneline
+2640714 [modify] ログイン画面の見出しを日本語に変更
+095806f [add] ログイン画面を作成
+217de6d [modify] メッセージをbタグで囲む
+fd127c4 [add] 自分の名前を表示する
+$ git log --graph
+* commit 26407140166064ef86dd2c496e14380e0050d0c4
+| Author: Taro Yamada <taro_yamada@example.com>
+| Date:   Wed Jul 29 09:40:01 2015 +0900
+|
+|     [modify] ログイン画面の見出しを日本語に変更
+|
+|     Loginをログイン画面に変更する
+|  
+* commit 095806f0f21b07831d222f10ff44bb228e59b6ea
+| Author: Taro Yamada <taro_yamada@example.com>
+| Date:   Wed Jul 29 09:32:15 2015 +0900
+|
+|     [add] ログイン画面を作成
+|
+|     ログイン画面[login.html]というファイルを作成する
+|  
+* commit 217de6db7e6199bfcec0ad04bcfb8aa737fa07ea
+| Author: Taro Yamada <taro_yamada@example.com>
+| Date:   Wed Jul 22 09:19:04 2015 +0900
+|
+|     [modify] メッセージをbタグで囲む
+|
+|     bタグでHello太郎を囲む
+|  
+* commit fd127c4d3b7c282e8e512787ee20c0f2bd7119f6
+  Author: Taro Yamada <taro_yamada@example.com>
+  Date:   Wed Jul 15 09:38:39 2015 +0900
 
-ここでは、masterブランチに結合した後も、git logで
+      [add] 自分の名前を表示する
+
+      html5でHello 太郎と表示する
+```
+1つの履歴になっていてある意味見やすいのですが、
+もっとブランチが複数にわかれていて、
+それぞれの人が異なるブランチで作業していたらどうでしょうか？
+git rebase はリポジトリのツリーの履歴を大きく変更するので、
+かなり危険な操作という意識をもってください。
+ローカル環境に影響する範囲ではコメント履歴を綺麗にする目的でよく使います。
+
+mergeコマンドを試したいので、戻しましょう。
+
+`git log --oneline`と入力してください。
+
+```
+$ git log --oneline
+2640714 [modify] ログイン画面の見出しを日本語に変更
+095806f [add] ログイン画面を作成
+217de6d [modify] メッセージをbタグで囲む
+fd127c4 [add] 自分の名前を表示する
+```
+
+「[modify] メッセージをbタグで囲む」の状態まで戻すときは行頭のハッシュ値をコピーして
+`git reset --hard [ハッシュ値]`と入力してください。
+
+```
+$ git reset --hard 217de6d
+HEAD is now at 217de6d [modify] メッセージをbタグで囲む
+$ git log --oneline
+217de6d [modify] メッセージをbタグで囲む
+fd127c4 [add] 自分の名前を表示する
+```
+戻りました。
+
+次はmasterブランチに結合した後も、git logで
 ログイン画面用のブランチ（トピックブランチ）で行ったコミットであることを、
 わかりやすく明確にしたいので、mergeコマンドを使います。
 
@@ -508,23 +586,70 @@ http://powerful-code.com/blog/2012/11/merge-or-rebase/
 $ git checkout master
 Switched to branch 'master'
 $ git log --oneline
-2fa0c37 [modify] メッセージをbタグで囲む
-16df9cb [add] 自分の名前を表示する
+217de6d [modify] メッセージをbタグで囲む
+fd127c4 [add] 自分の名前を表示する
 $ git merge --no-ff login_screen
 neocomplete does not work this version of Vim.
 It requires "if_lua" enabled Vim(7.3.885 or above).
 Press ENTER or type command to continue
 Merge made by the 'recursive' strategy.
- login.html | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 login.html
- $ git log --oneline
- b84d061 Merge branch 'login_screen'
- 84b7e42 [modify] ページ先頭のタイトルを日本語に変更
- e64d705 [add] ログイン画面を追加
- 2fa0c37 [modify] メッセージをbタグで囲む
- 16df9cb [add] 自分の名前を表示する
+login.html | 19 +++++++++++++++++++
+1 file changed, 19 insertions(+)
+create mode 100644 login.html
+$ git log --oneline
+eaf9f9d Merge branch 'login_screen'
+2640714 [modify] ログイン画面の見出しを日本語に変更
+095806f [add] ログイン画面を作成
+217de6d [modify] メッセージをbタグで囲む
+fd127c4 [add] 自分の名前を表示する
 ```
+
+`git log --graph`
+
+```
+*   commit 1f341cce88208bdac4c278ee3a17087a88e56d15
+|\  Merge: 217de6d 2640714
+| | Author: Taro Yamada <taro_yamada@example.com>
+| | Date:   Wed Jul 29 12:43:00 2015 +0900
+| |
+| |     Merge branch 'login_screen'
+| |
+| * commit 26407140166064ef86dd2c496e14380e0050d0c4
+| | Author: Taro Yamada <taro_yamada@example.com>
+| | Date:   Wed Jul 29 09:40:01 2015 +0900
+| |
+| |     [modify] ログイン画面の見出しを日本語に変更
+| |
+| |     Loginをログイン画面に変更する
+| |
+| * commit 095806f0f21b07831d222f10ff44bb228e59b6ea
+|/  Author: Taro Yamada <taro_yamada@example.com>
+|   Date:   Wed Jul 29 09:32:15 2015 +0900
+|
+|       [add] ログイン画面を作成
+|
+|       ログイン画面[login.html]というファイルを作成する
+|  
+* commit 217de6db7e6199bfcec0ad04bcfb8aa737fa07ea
+| Author: Taro Yamada <taro_yamada@example.com>
+| Date:   Wed Jul 22 09:19:04 2015 +0900
+|
+|     [modify] メッセージをbタグで囲む
+|
+|     bタグでHello太郎を囲む
+|  
+* commit fd127c4d3b7c282e8e512787ee20c0f2bd7119f6
+  Author: Taro Yamada <taro_yamada@example.com>
+  Date:   Wed Jul 15 09:38:39 2015 +0900
+
+      [add] 自分の名前を表示する
+
+      html5でHello 太郎と表示する
+```
+
+rebaseとmergeの使い分けについては以下の投稿が参考になると思います。
+http://powerful-code.com/blog/2012/11/merge-or-rebase/
+
 
 
 リモートリポジトリに反映
