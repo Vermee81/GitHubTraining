@@ -874,4 +874,4 @@ http://qiita.com/shuntaro_tamura/items/db1aef9cf9d78db50ffe
 やっぱり元に戻しましょう
 `git reflog`と実行してください。
 
-commit id を指定して`git revert {commit_id}`を実行してください。
+commit id を指定して`git reset --hard {commit_id}`を実行してください。
