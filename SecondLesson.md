@@ -13,9 +13,6 @@ Git ドリル 第2回(Gitを使った運用)
 
 [<img src="https://www.atlassian.com/ja/git/workflows/pageSections/00/contentFullWidth/0/tabs/00/pageSections/09/contentFullWidth/0/content_files/file1/document/git-workflow-svn-push-local.png" style="background-color: white">](https://www.atlassian.com/ja/git/workflows/pageSections/00/contentFullWidth/0/tabs/00/pageSections/09/contentFullWidth/0/content_files/file1/document/git-workflow-svn-push-local.png)
 
-フィーチャーブランチ
-------------------
-
 
 Gitflow
 -----------
@@ -41,6 +38,7 @@ Vincent Driessenさんが提起したワークフローです。
 
 デメリット
 - 覚えること多すぎ
+- 気にすること多すぎ
 
 参考
 -  http://keijinsonyaban.blogspot.jp/2010/10/successful-git-branching-model.html
@@ -99,10 +97,19 @@ Githubなどの分散型バージョン管理システムを使用したフロ�
 
 ドリル1
 --------
+
+前提
+
+公式リポジトリ：https://github.com/Vermee1981/centralized.git
+
+
+
 1. 公式リポジトリをforkしてください
+以下のリポジトリが公式リポジトリです。
+https://github.com/Vermee1981/centralized.git
 
 2. forkした自分のリポジトリをcloneしてください
-
+実行したディレクトリ配下にcentralizedという名前のディレクトリができます。
     ```
 $ git clone https://github.com/Vermee81/centralized.git
 Cloning into 'centralized'...
@@ -111,7 +118,11 @@ remote: Compressing objects: 100% (2/2), done.
 remote: Total 3 (delta 0), reused 3 (delta 0), pack-reused 0
 Unpacking objects: 100% (3/3), done.
 Checking connectivity... done.
-
+    ```
+次に共有リポジトリ(upstream)を登録してください。
+ここは共有リポジトリなので、同じコマンドで大丈夫です。
+    ```
+$ cd centralized
 $ git remote add upstream https://github.com/Vermee1981/centralized.git
 $ git config -l
 user.name=Vermee81
