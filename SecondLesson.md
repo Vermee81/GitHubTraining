@@ -100,9 +100,11 @@ Githubなどの分散型バージョン管理システムを使用したフロ�
 
 前提
 
+メンテナー：Vermee1981さん
+
 公式リポジトリ：https://github.com/Vermee1981/centralized.git
 
-
+共有リポジトリ：皆さんが公式リポジトリをforkして作成したリポジトリ
 
 1. 公式リポジトリをforkしてください
 以下のリポジトリが公式リポジトリです。
@@ -111,7 +113,7 @@ https://github.com/Vermee1981/centralized.git
 2. forkした自分のリポジトリをcloneしてください
 実行したディレクトリ配下にcentralizedという名前のディレクトリができます。
     ```
-$ git clone https://github.com/Vermee81/centralized.git
+$ git clone https://github.com/[自分のアカウント名]/centralized.git
 Cloning into 'centralized'...
 remote: Counting objects: 3, done.
 remote: Compressing objects: 100% (2/2), done.
@@ -119,15 +121,17 @@ remote: Total 3 (delta 0), reused 3 (delta 0), pack-reused 0
 Unpacking objects: 100% (3/3), done.
 Checking connectivity... done.
     ```
-次に共有リポジトリ(upstream)を登録してください。
-ここは共有リポジトリなので、同じコマンドで大丈夫です。
+次に公式リポジトリ(upstream)を登録してください。
+登録するコマンドは
+`git remote add upstream []公式リポジトリのアドレス]`
+です
     ```
 $ cd centralized
 $ git remote add upstream https://github.com/Vermee1981/centralized.git
 $ git config -l
-user.name=Vermee81
-user.email=hrksb5029@gmail.com
-core.excludesfile=/Users/hrksb/.gitignore
+user.name=[自分で設定したユーザー名]
+user.email=[自分で設定したメールアドレス]
+core.excludesfile=/[ホームディレクトリ]/.gitignore
 core.editor=/usr/bin/vim
 color.ui=auto
 core.repositoryformatversion=0
@@ -136,7 +140,7 @@ core.bare=false
 core.logallrefupdates=true
 core.ignorecase=true
 core.precomposeunicode=true
-remote.origin.url=https://github.com/Vermee81/centralized.git
+remote.origin.url=[自分の共有gitリポジトリ]
 remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
 branch.master.remote=origin
 branch.master.merge=refs/heads/master
@@ -177,17 +181,17 @@ $ git log --oneline
 a92083a Initial commit
     ```
 
-4. 自分のリポジトリにfeatureブランチをpushしてください
+4. 自分の共有リポジトリにfeatureブランチをpushしてください
     ```
 $ git push origin init_page
-Username for 'https://github.com': Vermee81
-Password for 'https://Vermee81@github.com':
+Username for 'https://github.com': [自分のアカウント名]
+Password for 'https://[自分のアカウント名]@github.com':
 Counting objects: 3, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (3/3), done.
 Writing objects: 100% (3/3), 407 bytes | 0 bytes/s, done.
 Total 3 (delta 0), reused 0 (delta 0)
-To https://github.com/Vermee81/centralized.git
+To [自分の共有リポジトリ]
 * [new branch]      init_page -> init_page
     ```
 
@@ -270,6 +274,14 @@ From https://github.com/Vermee1981/centralized
 Updating 78f9050..5010558
 Fast-forward
     ```
+
+ドリル２
+--------
+- グループを作って、メンテナー役と開発者役を決めてください。
+- メンテナーの人は公式リポジトリとなるリポジトリをgit上に作ってください。
+- あとはドリル１と同じように進めてみてください。
+
+
 
 「チーム開発実践入門」で紹介していたワークフロー
 > - GitHub型ワークフローを採用し、各自がForkしたリモートリポジトリをGitHub上に持つ
