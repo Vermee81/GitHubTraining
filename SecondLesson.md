@@ -123,7 +123,7 @@ Checking connectivity... done.
     ```
 次に公式リポジトリ(upstream)を登録してください。
 登録するコマンドは
-`git remote add upstream []公式リポジトリのアドレス]`
+`git remote add upstream [公式リポジトリのアドレス]`
 です
     ```
 $ cd centralized
@@ -150,8 +150,10 @@ remote.upstream.fetch=+refs/heads/*:refs/remotes/upstream/*
 
 3. ローカルリポジトリにfeatureブランチを作成して、何かしら変更を加えてcommitしてください
 
+ブランチ名は修正する内容がイメージできる適切な名前をつけてください。
+
     ```
-$ git checkout -b init_page
+$ git checkout -b [修正する内容がイメージできるブランチ名]
 $ vim index.html
 $ git status
 On branch init_page

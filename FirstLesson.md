@@ -5,12 +5,13 @@ Git ドリル 第1回
 ---------
 1. ユーザー名とメールアドレスを設定
 
+    まずは自分の名前とメールアドレスを設定しましょう。
     ```
     git config --global user.name "Taro Yamada"
     git config --global user.email "yamada@example.net"
     ```
     ちなみに--globalオプションをつけて修正される設定ファイルは
-    ~/.gitconfig
+    ~/.gitconfigに保存されます。
     世界中の人の画面に表示されることを意識して
     （日本語フォントが入っていない環境を意識して）、ユーザー名は英語にしましょう。
 
@@ -27,7 +28,7 @@ Git ドリル 第1回
     color.ui=true
     ```
 
-3. やり直したいときは同じ設定コマンド入力しましょう
+3. やり直したいときは設定したときと同じコマンドを入力しましょう
 
 
 練習環境の作成
@@ -651,7 +652,6 @@ rebaseとmergeの使い分けについては以下の投稿が参考になると
 http://powerful-code.com/blog/2012/11/merge-or-rebase/
 
 
-
 リモートリポジトリに反映
 ----------------
 masterブランチにチェックアウトして、
@@ -878,6 +878,5 @@ commit id を指定して`git reset --hard {commit_id}`を実行してくださ�
 
 
 TODO
-======
+--------
 - タグについて
--
