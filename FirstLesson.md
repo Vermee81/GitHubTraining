@@ -651,6 +651,69 @@ fd127c4 [add] 自分の名前を表示する
 rebaseとmergeの使い分けについては以下の投稿が参考になると思います。
 http://powerful-code.com/blog/2012/11/merge-or-rebase/
 
+タグで節目をつける
+-----------------
+そろそろリモートリポジトリに反映したいところですが、その前にタグをつけましょう。
+タグはコミットに目印をつけるための機能です。
+よくある運用ではバージョン番号をタグ名としてつけます。
+直前のコミットにタグをつけてみましょう。
+git tag [タグ名]で現在のブランチの直前のコミットに対してタグをつけます。
+[v1.0]というタグ名を直前のコミットにつけてください。
+
+```
+$ git tag v1.0
+$ git tag
+ver1.0
+```
+
+タグの詳細を確認してみましょう。
+```
+$ git show v1.0
+commit 1f341cce88208bdac4c278ee3a17087a88e56d15
+Merge: 217de6d 2640714
+Author: Taro Yamada <taro_yamada@example.com>
+Date:   Wed Jul 29 12:43:00 2015 +0900
+
+    Merge branch 'login_screen'
+```
+
+日付がついていますね。
+なのでタグ名に日付をつけるのは冗長です。
+安心してください。時間をトリガーにしてタグを検索することもできます。
+```
+$ git log --no-walk --tags --since="1 weeks ago"
+commit 018a75d0a8b8f17d6fc8463de8725966b944bc0f
+Merge: 4d9e953 e14ae62
+Author: Taro Yamada <taro_yamada@example.com>
+Date:   Fri Jan 8 17:13:06 2016 +0900
+```
+
+過去のコミットにタグをつけることもできます。
+`git tag [タグ名] [コミットid]`
+タグを削除するときは
+`git tag -d [タグ名]`を実行します。
+
+試しに過去のコミットにタグをつけて、削除しましょう。
+```
+$ git log --oneline
+018a75d Merge branch 'login_screen'
+e14ae62 [modify] ページ先頭のタイトルを日本語に変更
+e515a33 [add] ログイン画面を追加
+4d9e953 [modify] メッセージをbタグで囲む
+a7ea02f [add] 自分の名前を表示する
+$ git tag v0.1 e515a33
+$ git tag
+v0.1
+v1.0
+$ git tag -d v0.1
+Deleted tag 'v0.1' (was e515a33)
+$ git tag
+v1.0
+```
+
+タグをリモートリポジトリに反映するときは
+`git push origin --tags`です。
+ここでは、まだ実行しないでください。
 
 リモートリポジトリに反映
 ----------------
