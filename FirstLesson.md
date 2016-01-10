@@ -713,7 +713,7 @@ v1.0
 
 タグをリモートリポジトリに反映するときは
 `git push origin --tags`です。
-ここでは、まだ実行しないでください。
+ここではまだ、実行しないでください。
 
 リモートリポジトリに反映
 ----------------
@@ -731,6 +731,18 @@ Writing objects: 100% (13/13), 1.85 KiB | 0 bytes/s, done.
 Total 13 (delta 2), reused 0 (delta 0)
 To /秘密/kyoyuu.git
  * [new branch]      master -> master
+```
+
+タグもリモートリポジトリに反映しましょう
+```
+$ git push origin --tags
+Counting objects: 13, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (11/11), done.
+Writing objects: 100% (13/13), 1.85 KiB | 0 bytes/s, done.
+Total 13 (delta 2), reused 0 (delta 0)
+To /秘密/kyoyuu.git
+ * [new tag]         v1.0 -> v1.0
 ```
 
 シナリオ：
