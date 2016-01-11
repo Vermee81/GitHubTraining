@@ -56,7 +56,7 @@ GitHubを使ったワークフロー。
 > - 開発が完了したらmasterへPull Requestを送る
 > - Pull Requestがレビューされたらmasterにマージし、その場で本番環境にリリースする
 
-「チーム開発実践幽門」p86 から引用
+「チーム開発実践入門」p86 から引用
 
 開発者が覚えることは3つ
 - masterはリリース用だからさわらない
@@ -149,9 +149,7 @@ remote.upstream.fetch=+refs/heads/*:refs/remotes/upstream/*
     ```
 
 3. ローカルリポジトリにfeatureブランチを作成して、何かしら変更を加えてcommitしてください
-
 ブランチ名は修正する内容がイメージできる適切な名前をつけてください。
-
     ```
 $ git checkout -b [修正する内容がイメージできるブランチ名]
 $ vim index.html
@@ -182,7 +180,6 @@ $ git log --oneline
 96ab3f6 [add] Add index.html
 a92083a Initial commit
     ```
-
 4. 自分の共有リポジトリにfeatureブランチをpushしてください
     ```
 $ git push origin init_page
@@ -201,7 +198,7 @@ To [自分の共有リポジトリ]
 
 6. pull requestを受け取ったメンテナーは自分のローカルリポジトリにブランチをfetchしてください。
 衝突がなければmergeしてください。
-  ```
+    ```
 $ git fetch https://github.com/Vermee81/centralized.git init_page
 remote: Counting objects: 6, done.
 remote: Compressing objects: 100% (5/5), done.
@@ -249,7 +246,6 @@ $ git log --graph
 
         Initial commit
     ```
-
 7. メンテナーは変更をmasterへ反映してください。
     ```
 $ git push origin master
@@ -262,8 +258,7 @@ $ git push origin master
  Total 7 (delta 1), reused 0 (delta 0)
  To https://github.com/Vermee1981/centralized.git
     a92083a..5010558  master -> master
-    ```
-
+     ```
 8. 開発者は公式リポジトリの変更を自分のmasterブランチに反映してください
     ```
 $ git pull upstream master
